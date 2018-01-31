@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}" >
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialize Bootstrap Admin panel</title>
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" th:href="@{dist/img/ico/fav.png}" href="../static/dist/img/ico/fav.png" />
+    <!-- Start Global Mandatory Style
+         =====================================================================-->
+    <!-- jquery-ui css -->
+    <link th:href="@{plugins/jquery-ui-1.12.1/jquery-ui.min.css}" href="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <!-- materialize css -->
+    <link th:href="@{plugins/materialize/css/materialize.min.css}" href="../static/plugins/materialize/css/materialize.min.css" rel="stylesheet" />
+    <!-- Bootstrap css-->
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link th:href="@{plugins/animate/animate.css}" href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <!-- Material Icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link th:href="@{font-awesome/css/font-awesome.min.css}" href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Monthly css -->
+    <link th:href="@{plugins/monthly/monthly.css}" href="../static/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar scroll css -->
+    <link th:href="@{plugins/simplebar/dist/simplebar.css}" href="../static/plugins/simplebar/dist/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- mCustomScrollbar css -->
+    <link th:href="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css}" href="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- custom CSS -->
+    <link th:href="@{dist/css/stylematerial.css}" href="../static/dist/css/stylematerial.css" rel="stylesheet" />
+    <style>
+        .control-label{
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <!--Layout goes here-->
+    <div th:replace="layouts/header :: header"> </div>
+
+    <!-- layout ends here -->
+
+
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="header-icon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="header-title">
+                    <h1> Users</h1>
+                    <small> Users overview</small>
+                    <ul class="link hidden-xs">
+                        <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="index.html">Users</a></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- page section -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Data tables -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-table fa-lg"></i>
+                                <h2>Users Table</h2>
+                            </div>
+                            <div class="card-content">
+                                <p class="m-b-15" th:text="${'Result: '+ count}"></p>
+                                <div  th:if="${userNotFound} != null"  class="alert alert-danger z-depth-1">
+                                    <strong>Danger!</strong> User not found.
+                                </div>
+                                <div  th:if="${userDeleted} != null"  class="alert alert-danger z-depth-1">
+                                    <strong>Danger!</strong> User deleted.
+                                </div>
+                                <div  th:if="${userUpdated} != null"  class="alert alert-success z-depth-1">
+                                    <strong>Success!</strong> User updated.
+                                </div>
+                                <div class="table-responsive">
+                                    <table id="dataTableExample1" class="table table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Created At</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th:block th:each="user : ${users}">
+                                                <tr>
+                                                    <td th:text="${user.id}"> </td>
+                                                    <td th:text="${user.fName}"> </td>
+                                                    <td th:text="${user.lName}"> </td>
+                                                    <td th:text="${user.email}"> </td>
+                                                    <td th:text="${#dates.format(user.created_at, 'dd.MM.yyyy HH:mm')}"> </td>
+                                                    <td>
+                                                        <button type="button" class="waves-effect waves-light btn m-b-10"  data-toggle="modal" th:attr="data-target='#myModal'+${user.id }">Edit</button>
+                                                    </td>
+                                                    <div th:attr="id='myModal'+${user.id }" class="modal fade" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">Edit User</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <form th:action="@{/edit-user/} + ${user.id}" th:attr="id='form'+${user.id }" class="form-horizontal" method="post">
+                                                                                <h2 class="text-center" th:text="${'Edit '+user.fName+' '+user.lName}"></h2>
+                                                                                <fieldset>
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-md-3 control-label">First Name:</label>
+                                                                                        <div class="col-md-9">
+                                                                                            <div class="input-field">
+                                                                                                <input name="fName" type="text" class="validate" th:value="${user.fName}">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-md-3 control-label">Last Name:</label>
+                                                                                        <div class="col-md-9">
+                                                                                            <div class="input-field">
+                                                                                                <input name="lName" type="text" class="validate" th:value="${user.lName}">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="col-md-3 control-label">Email:</label>
+                                                                                        <div class="col-md-9">
+                                                                                            <div class="input-field">
+                                                                                                <input name="email" type="text" class="validate"  th:value="${user.email}">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <input type="submit" th:onclick="'submitForm('+${user.id}+')'" class="btn btn-success pull-left" th:attr="form='form'+${user.id }" value="Submit">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <td><a th:href="@{/delete-user/}+ ${user.id}"> <i class="fa fa-times"></i></a></td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./Data table -->
+                </div>
+                <!-- ./row -->
+            </div>
+            <!-- ./cotainer -->
+        </div>
+        <!-- ./page-content -->
+    </div>
+    <!-- ./page-content-wrapper -->
+</div>
+<!-- ./page-wrapper -->
+
+
+
+<!-- Preloader -->
+
+<div th:replace="layouts/preloader :: preloader"> </div>
+
+<!-- End Preloader -->
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script th:src="@{plugins/jQuery/jquery-3.2.1.min.js}" src="../static/plugins/jQuery/jquery-3.2.1.min.js"
+        type="text/javascript"></script>
+<!-- jquery-ui -->
+<script th:src="@{plugins/jquery-ui-1.12.1/jquery-ui.min.js}" src="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script th:src="@{bootstrap/js/bootstrap.min.js}" src="../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- materialize  -->
+<script th:src="@{plugins/materialize/js/materialize.min.js}" src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<!-- metismenu-master -->
+<script th:src="@{plugins/metismenu-master/dist/metisMenu.min.js}" src="../static/plugins/metismenu-master/dist/metisMenu.min.js" type="text/javascript"></script>
+<!-- SlimScroll -->
+<script th:src="@{plugins/slimScroll/jquery.slimscroll.min.js}" src="../static/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- m-custom-scrollbar -->
+<script th:src="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js}" src="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+<!-- scroll -->
+<script th:src="@{plugins/simplebar/dist/simplebar.js}" src="../static/plugins/simplebar/dist/simplebar.js" type="text/javascript"></script>
+<!-- custom js -->
+<script th:src="@{dist/js/custom.js}" src="../static/dist/js/custom.js" type="text/javascript"></script>
+<!-- End Core Plugins
+     =====================================================================-->
+<!-- Start Page Lavel Plugins
+     =====================================================================-->
+<!-- Sparkline js -->
+<script th:src="@{plugins/sparkline/sparkline.min.js}" src="../static/plugins/sparkline/sparkline.min.js" type="text/javascript"></script>
+<!-- Counter js -->
+<script th:src="@{plugins/counterup/jquery.counterup.min.js}" src="../static/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<!-- ChartJs JavaScript -->
+<script th:src="@{plugins/chartJs/Chart.min.js}" src="../static/plugins/chartJs/Chart.min.js" type="text/javascript"></script>
+<!-- Monthly js -->
+<script th:src="@{plugins/monthly/monthly.js}" src="../static/plugins/monthly/monthly.js" type="text/javascript"></script>
+
+<!-- End Page Lavel Plugins
+     =====================================================================-->
+<!-- Start Theme label Script
+     =====================================================================-->
+<!-- main js-->
+<script th:src="@{dist/js/main.js}" src="../static/dist/js/main.js" type="text/javascript"></script>
+<!-- End Theme label Script
+     =====================================================================-->
+
+<!-- dataTables js -->
+<script th:src="@{plugins/datatables/dataTables.min.js}" src="../static/plugins/datatables/dataTables.min.js" type="text/javascript"></script>
+<script th:src="@{plugins/tabellajs/dist/tabella.js}" src="../static/plugins/tabellajs/dist/tabella.js" type="text/javascript"></script>
+<script>
+    function submitForm(id) {
+        document.getElementById('form'+id).submit();
+    }
+</script>
+</body>
+</html>

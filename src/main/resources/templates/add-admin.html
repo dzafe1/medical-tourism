@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialize Bootstrap Admin panel</title>
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" th:href="@{dist/img/ico/fav.png}" href="../static/dist/img/ico/fav.png" />
+    <!-- Start Global Mandatory Style
+         =====================================================================-->
+    <!-- jquery-ui css -->
+    <link th:href="@{plugins/jquery-ui-1.12.1/jquery-ui.min.css}" href="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <!-- materialize css -->
+    <link th:href="@{plugins/materialize/css/materialize.min.css}" href="../static/plugins/materialize/css/materialize.min.css" rel="stylesheet" />
+    <!-- Bootstrap css-->
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link th:href="@{plugins/animate/animate.css}" href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <!-- Material Icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link th:href="@{font-awesome/css/font-awesome.min.css}" href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Monthly css -->
+    <link th:href="@{plugins/monthly/monthly.css}" href="../static/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar scroll css -->
+    <link th:href="@{plugins/simplebar/dist/simplebar.css}" href="../static/plugins/simplebar/dist/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- mCustomScrollbar css -->
+    <link th:href="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css}" href="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- custom CSS -->
+    <link th:href="@{dist/css/stylematerial.css}" href="../static/dist/css/stylematerial.css" rel="stylesheet" />
+    <style>
+        .validation{
+            color: #ff1840;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <!--Layout goes here-->
+    <div th:replace="layouts/header :: header"> </div>
+
+    <!-- layout ends here -->
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header z-depth-1">
+                <div class="header-icon">
+                    <i class="fa fa-plus"></i>
+                </div>
+                <div class="header-title">
+                    <h1> Add Admin</h1>
+
+                    <ul class="link hidden-xs">
+                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="#">forms basic</a></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- page section -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- forms cntrol -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-plus fa-lg"></i>
+                                <h2>Form</h2>
+                            </div>
+                            <div class="card-content">
+
+                                <div  th:if="${adminInserted} != null" class="alert alert-success z-depth-1">
+                                    <strong>Success!</strong> New admin inserted.
+                                </div>
+                                <form action="#" th:action="@{/add-admin}" th:object="${user}" id="form" method="post" class="form-horizontal">
+                                    <input type="hidden"
+                                           th:name="${_csrf.parameterName}"
+                                           th:value="${_csrf.token}" />
+                                    <h2 class="text-center">Add Admin</h2>
+                                    <fieldset>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Fist Name:</label>
+                                            <div class="col-md-4">
+                                                <div class="input-field">
+                                                    <input name="fName" th:field="*{fName}"  type="text" class="validate" placeholder="First Name">
+                                                    <span th:if="${#fields.hasErrors('fName')}" class="validation" th:errors="*{fName}">Name Error</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Last Name:</label>
+                                            <div class="col-md-4">
+                                                <div class="input-field">
+                                                    <input name="lName" th:field="*{lName}" type="text" class="validate" placeholder="Last Name">
+                                                    <span th:if="${#fields.hasErrors('lName')}" class="validation" th:errors="*{lName}">Name Error</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Email:</label>
+                                            <div class="col-md-4">
+                                                <div class="input-field">
+                                                    <input name="email" th:field="*{email}" type="email" class="validate" placeholder="Email">
+                                                    <span th:if="${#fields.hasErrors('email')}" class="validation" th:errors="*{email}">Name Error</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Password:</label>
+                                            <div class="col-md-4">
+                                                <div class="input-field">
+                                                    <input name="password" th:field="*{password}" type="password" class="validate" placeholder="Password">
+                                                    <span th:if="${#fields.hasErrors('password')}" class="validation" th:errors="*{password}">Name Error</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Repeat Password:</label>
+                                            <div class="col-md-4">
+                                                <div class="input-field">
+                                                    <input name="repeatPassword" type="password" class="validation" placeholder="Repeat Password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label"></label>
+                                            <div class="col-md-4">
+                                                <button type="submit" onclick="funkcija()" class="btn btn-success">Submit <span class="glyphicon glyphicon-send"></span></button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./bootstrap forms -->
+            </div>
+            <!-- ./row -->
+        </div>
+        <!-- ./cotainer -->
+    </div>
+    <!-- ./page-content -->
+    <!-- ./page-content-wrapper -->
+
+    <script>
+        function funkcija(){
+            document.getElementById("form").submit();
+        }
+    </script>
+
+
+
+</div>
+<!-- Preloader -->
+
+<div th:replace="layouts/preloader :: preloader"> </div>
+
+<!-- End Preloader -->
+
+
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script th:src="@{plugins/jQuery/jquery-3.2.1.min.js}" src="../static/plugins/jQuery/jquery-3.2.1.min.js"
+type="text/javascript"></script>
+<!-- jquery-ui -->
+<script th:src="@{plugins/jquery-ui-1.12.1/jquery-ui.min.js}" src="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script th:src="@{bootstrap/js/bootstrap.min.js}" src="../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- materialize  -->
+<script th:src="@{plugins/materialize/js/materialize.min.js}" src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<!-- metismenu-master -->
+<script th:src="@{plugins/metismenu-master/dist/metisMenu.min.js}" src="../static/plugins/metismenu-master/dist/metisMenu.min.js" type="text/javascript"></script>
+<!-- SlimScroll -->
+<script th:src="@{plugins/slimScroll/jquery.slimscroll.min.js}" src="../static/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- m-custom-scrollbar -->
+<script th:src="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js}" src="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+<!-- scroll -->
+<script th:src="@{plugins/simplebar/dist/simplebar.js}" src="../static/plugins/simplebar/dist/simplebar.js" type="text/javascript"></script>
+<!-- custom js -->
+<script th:src="@{dist/js/custom.js}" src="../static/dist/js/custom.js" type="text/javascript"></script>
+<!-- End Core Plugins
+     =====================================================================-->
+<!-- Start Page Lavel Plugins
+     =====================================================================-->
+<!-- Sparkline js -->
+<script th:src="@{plugins/sparkline/sparkline.min.js}" src="../static/plugins/sparkline/sparkline.min.js" type="text/javascript"></script>
+<!-- Counter js -->
+<script th:src="@{plugins/counterup/jquery.counterup.min.js}" src="../static/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<!-- ChartJs JavaScript -->
+<script th:src="@{plugins/chartJs/Chart.min.js}" src="../static/plugins/chartJs/Chart.min.js" type="text/javascript"></script>
+<!-- Monthly js -->
+<script th:src="@{plugins/monthly/monthly.js}" src="../static/plugins/monthly/monthly.js" type="text/javascript"></script>
+
+<!-- End Page Lavel Plugins
+     =====================================================================-->
+<!-- Start Theme label Script
+     =====================================================================-->
+<!-- main js-->
+<script th:src="@{dist/js/main.js}" src="../static/dist/js/main.js" type="text/javascript"></script>
+<!-- End Theme label Script
+     =====================================================================-->
+</body>
+</html>

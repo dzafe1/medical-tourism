@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}" >
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialize Bootstrap Admin panel</title>
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" th:href="@{dist/img/ico/fav.png}" href="../static/dist/img/ico/fav.png" />
+    <!-- Start Global Mandatory Style
+         =====================================================================-->
+    <!-- jquery-ui css -->
+    <link th:href="@{plugins/jquery-ui-1.12.1/jquery-ui.min.css}" href="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <!-- materialize css -->
+    <link th:href="@{plugins/materialize/css/materialize.min.css}" href="../static/plugins/materialize/css/materialize.min.css" rel="stylesheet" />
+    <!-- Bootstrap css-->
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link th:href="@{plugins/animate/animate.css}" href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <!-- Material Icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link th:href="@{font-awesome/css/font-awesome.min.css}" href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Monthly css -->
+    <link th:href="@{plugins/monthly/monthly.css}" href="../static/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar scroll css -->
+    <link th:href="@{plugins/simplebar/dist/simplebar.css}" href="../static/plugins/simplebar/dist/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- mCustomScrollbar css -->
+    <link th:href="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css}" href="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- custom CSS -->
+    <link th:href="@{dist/css/stylematerial.css}" href="../static/dist/css/stylematerial.css" rel="stylesheet" />
+    <!-- fullcalendar css -->
+    <link th:href="@{plugins/fullcalendar/fullcalendar.min.css}" href="../static/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+    <!-- fullcalendar print css -->
+    <link th:href="@{plugins/fullcalendar/fullcalendar.print.min.css}" href="../static/plugins/fullcalendar/fullcalendar.print.min.css" rel="stylesheet" media='print' type="text/css" />
+
+</head>
+<body>
+<div id="wrapper">
+    <!--Layout goes here-->
+    <div th:replace="layouts/header :: header"> </div>
+
+    <!-- layout ends here -->
+
+
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="header-icon">
+                    <i class="fa fa-tachometer"></i>
+                </div>
+                <div class="header-title">
+                    <h1> Appointments</h1>
+                    <small> Appointments overview</small>
+                    <ul class="link hidden-xs">
+                        <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="index.html">Appointments</a></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- page section -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="panel m-l-10">
+                                    <div class="panel-body z-depth-1">
+                                        <div id="external-events">
+                                            <h3>Drag your Events</h3>
+                                            <div class="fc-event z-depth-2 m-b-5 ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">First Event</div>
+                                            <div class="fc-event z-depth-2 m-b-5 ui-draggable ui-draggable-handle">second Event</div>
+                                            <div class="fc-event z-depth-2 m-b-5 ui-draggable ui-draggable-handle">Third Event</div>
+                                            <div class="fc-event z-depth-2 m-b-5 ui-draggable ui-draggable-handle">Forth Event</div>
+                                            <div class="fc-event z-depth-2 m-b-5 ui-draggable ui-draggable-handle">Fifth Event</div>
+                                            <p>
+                                                <input type="checkbox" id="drop-remove">
+                                                <label for="drop-remove">remove after drop</label>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-bd hidden-xs hidden-sm m-l-10">
+                                    <div class="panel-body z-depth-1">
+                                        <h3 class="m-t-0">FullCalendar</h3>
+                                        <p> is a jQuery plugin that provides a full-sized, drag &amp; drop calendar like the one below. It uses AJAX to fetch events on-the-fly for each month and is easily configured to use your own feed format (an extension is provided for Google Calendar).</p>
+                                        <p><a href="https://fullcalendar.io/" target="_blank">FullCalendar documentation</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-9">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <!-- calender -->
+                                        <div id="calendar" class="fc fc-unthemed fc-ltr"><div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right">today</button></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active">month</button><button type="button" class="fc-agendaWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-agendaDay-button fc-button fc-state-default">day</button><button type="button" class="fc-listMonth-button fc-button fc-state-default fc-corner-right">list</button></div></div><div class="fc-center"><h2>December 2016</h2></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-month-view fc-basic-view" style=""><table><thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header" style="border-right-width: 1px; margin-right: -1.4px;"><table><thead><tr><th class="fc-day-header fc-widget-header fc-sun"><span>Sun</span></th><th class="fc-day-header fc-widget-header fc-mon"><span>Mon</span></th><th class="fc-day-header fc-widget-header fc-tue"><span>Tue</span></th><th class="fc-day-header fc-widget-header fc-wed"><span>Wed</span></th><th class="fc-day-header fc-widget-header fc-thu"><span>Thu</span></th><th class="fc-day-header fc-widget-header fc-fri"><span>Fri</span></th><th class="fc-day-header fc-widget-header fc-sat"><span>Sat</span></th></tr></thead></table></div></td></tr></thead><tbody class="fc-body"><tr><td class="fc-widget-content"><div class="fc-scroller fc-day-grid-container" style="overflow-x: hidden; overflow-y: scroll; height: 633.6px;"><div class="fc-day-grid fc-unselectable"><div class="fc-row fc-week fc-widget-content" style="height: 105px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-past" data-date="2016-11-27"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-past" data-date="2016-11-28"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-past" data-date="2016-11-29"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-past" data-date="2016-11-30"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2016-12-01"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2016-12-02"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2016-12-03"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-past" data-date="2016-11-27"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-11-27&quot;,&quot;type&quot;:&quot;day&quot;}">27</a></td><td class="fc-day-top fc-mon fc-other-month fc-past" data-date="2016-11-28"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-11-28&quot;,&quot;type&quot;:&quot;day&quot;}">28</a></td><td class="fc-day-top fc-tue fc-other-month fc-past" data-date="2016-11-29"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-11-29&quot;,&quot;type&quot;:&quot;day&quot;}">29</a></td><td class="fc-day-top fc-wed fc-other-month fc-past" data-date="2016-11-30"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-11-30&quot;,&quot;type&quot;:&quot;day&quot;}">30</a></td><td class="fc-day-top fc-thu fc-past" data-date="2016-12-01"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-01&quot;,&quot;type&quot;:&quot;day&quot;}">1</a></td><td class="fc-day-top fc-fri fc-past" data-date="2016-12-02"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-02&quot;,&quot;type&quot;:&quot;day&quot;}">2</a></td><td class="fc-day-top fc-sat fc-past" data-date="2016-12-03"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-03&quot;,&quot;type&quot;:&quot;day&quot;}">3</a></td></tr></thead><tbody><tr><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end  fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">First Event</span></div><div class="fc-resizer fc-end-resizer"></div></a></td><td></td><td></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable"><div class="fc-content"><span class="fc-time">1p</span> <span class="fc-title">Business Lunch</span></div></a></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 105px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2016-12-04"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2016-12-05"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2016-12-06"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2016-12-07"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2016-12-08"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2016-12-09"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2016-12-10"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2016-12-04"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-04&quot;,&quot;type&quot;:&quot;day&quot;}">4</a></td><td class="fc-day-top fc-mon fc-past" data-date="2016-12-05"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-05&quot;,&quot;type&quot;:&quot;day&quot;}">5</a></td><td class="fc-day-top fc-tue fc-past" data-date="2016-12-06"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-06&quot;,&quot;type&quot;:&quot;day&quot;}">6</a></td><td class="fc-day-top fc-wed fc-past" data-date="2016-12-07"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-07&quot;,&quot;type&quot;:&quot;day&quot;}">7</a></td><td class="fc-day-top fc-thu fc-past" data-date="2016-12-08"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-08&quot;,&quot;type&quot;:&quot;day&quot;}">8</a></td><td class="fc-day-top fc-fri fc-past" data-date="2016-12-09"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-09&quot;,&quot;type&quot;:&quot;day&quot;}">9</a></td><td class="fc-day-top fc-sat fc-past" data-date="2016-12-10"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-10&quot;,&quot;type&quot;:&quot;day&quot;}">10</a></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="2"></td><td class="fc-bgevent" style="background-color:#ff9f89" colspan="2"></td><td colspan="3"></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 105px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2016-12-11"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2016-12-12"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2016-12-13"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2016-12-14"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2016-12-15"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2016-12-16"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2016-12-17"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2016-12-11"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-11&quot;,&quot;type&quot;:&quot;day&quot;}">11</a></td><td class="fc-day-top fc-mon fc-past" data-date="2016-12-12"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-12&quot;,&quot;type&quot;:&quot;day&quot;}">12</a></td><td class="fc-day-top fc-tue fc-past" data-date="2016-12-13"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-13&quot;,&quot;type&quot;:&quot;day&quot;}">13</a></td><td class="fc-day-top fc-wed fc-past" data-date="2016-12-14"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-14&quot;,&quot;type&quot;:&quot;day&quot;}">14</a></td><td class="fc-day-top fc-thu fc-past" data-date="2016-12-15"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-15&quot;,&quot;type&quot;:&quot;day&quot;}">15</a></td><td class="fc-day-top fc-fri fc-past" data-date="2016-12-16"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-16&quot;,&quot;type&quot;:&quot;day&quot;}">16</a></td><td class="fc-day-top fc-sat fc-past" data-date="2016-12-17"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-17&quot;,&quot;type&quot;:&quot;day&quot;}">17</a></td></tr></thead><tbody><tr><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable" style="background-color:#37a000;border-color:#37a000"><div class="fc-content"><span class="fc-time">11a</span> <span class="fc-title">Meeting</span></div></a></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 105px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2016-12-18"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2016-12-19"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2016-12-20"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2016-12-21"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2016-12-22"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2016-12-23"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2016-12-24"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2016-12-18"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-18&quot;,&quot;type&quot;:&quot;day&quot;}">18</a></td><td class="fc-day-top fc-mon fc-past" data-date="2016-12-19"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-19&quot;,&quot;type&quot;:&quot;day&quot;}">19</a></td><td class="fc-day-top fc-tue fc-past" data-date="2016-12-20"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-20&quot;,&quot;type&quot;:&quot;day&quot;}">20</a></td><td class="fc-day-top fc-wed fc-past" data-date="2016-12-21"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-21&quot;,&quot;type&quot;:&quot;day&quot;}">21</a></td><td class="fc-day-top fc-thu fc-past" data-date="2016-12-22"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-22&quot;,&quot;type&quot;:&quot;day&quot;}">22</a></td><td class="fc-day-top fc-fri fc-past" data-date="2016-12-23"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-23&quot;,&quot;type&quot;:&quot;day&quot;}">23</a></td><td class="fc-day-top fc-sat fc-past" data-date="2016-12-24"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-24&quot;,&quot;type&quot;:&quot;day&quot;}">24</a></td></tr></thead><tbody><tr><td class="fc-event-container" colspan="2"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable fc-resizable"><div class="fc-content"> <span class="fc-title">Conference</span></div><div class="fc-resizer fc-end-resizer"></div></a></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-bgevent" style="background-color:#ff9f89" colspan="1"></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 105px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2016-12-25"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2016-12-26"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2016-12-27"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2016-12-28"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2016-12-29"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2016-12-30"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2016-12-31"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2016-12-25"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-25&quot;,&quot;type&quot;:&quot;day&quot;}">25</a></td><td class="fc-day-top fc-mon fc-past" data-date="2016-12-26"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-26&quot;,&quot;type&quot;:&quot;day&quot;}">26</a></td><td class="fc-day-top fc-tue fc-past" data-date="2016-12-27"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-27&quot;,&quot;type&quot;:&quot;day&quot;}">27</a></td><td class="fc-day-top fc-wed fc-past" data-date="2016-12-28"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-28&quot;,&quot;type&quot;:&quot;day&quot;}">28</a></td><td class="fc-day-top fc-thu fc-past" data-date="2016-12-29"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-29&quot;,&quot;type&quot;:&quot;day&quot;}">29</a></td><td class="fc-day-top fc-fri fc-past" data-date="2016-12-30"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-30&quot;,&quot;type&quot;:&quot;day&quot;}">30</a></td><td class="fc-day-top fc-sat fc-past" data-date="2016-12-31"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2016-12-31&quot;,&quot;type&quot;:&quot;day&quot;}">31</a></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td class="fc-event-container"><a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable"><div class="fc-content"><span class="fc-time">8p</span> <span class="fc-title">Party</span></div></a></td><td></td><td></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-bgevent" style="background-color:#ff9f89" colspan="3"></td><td colspan="4"></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 108px;"><div class="fc-bg"><table><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-past" data-date="2017-01-01"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-past" data-date="2017-01-02"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-past" data-date="2017-01-03"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-past" data-date="2017-01-04"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-past" data-date="2017-01-05"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-past" data-date="2017-01-06"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-past" data-date="2017-01-07"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-past" data-date="2017-01-01"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-01&quot;,&quot;type&quot;:&quot;day&quot;}">1</a></td><td class="fc-day-top fc-mon fc-other-month fc-past" data-date="2017-01-02"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-02&quot;,&quot;type&quot;:&quot;day&quot;}">2</a></td><td class="fc-day-top fc-tue fc-other-month fc-past" data-date="2017-01-03"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-03&quot;,&quot;type&quot;:&quot;day&quot;}">3</a></td><td class="fc-day-top fc-wed fc-other-month fc-past" data-date="2017-01-04"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-04&quot;,&quot;type&quot;:&quot;day&quot;}">4</a></td><td class="fc-day-top fc-thu fc-other-month fc-past" data-date="2017-01-05"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-05&quot;,&quot;type&quot;:&quot;day&quot;}">5</a></td><td class="fc-day-top fc-fri fc-other-month fc-past" data-date="2017-01-06"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-06&quot;,&quot;type&quot;:&quot;day&quot;}">6</a></td><td class="fc-day-top fc-sat fc-other-month fc-past" data-date="2017-01-07"><a class="fc-day-number" data-goto="{&quot;date&quot;:&quot;2017-01-07&quot;,&quot;type&quot;:&quot;day&quot;}">7</a></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td class="fc-nonbusiness fc-bgevent" colspan="1"></td><td colspan="6"></td></tr></tbody></table></div><div class="fc-bgevent-skeleton"><table><tbody><tr><td colspan="6"></td><td class="fc-nonbusiness fc-bgevent" colspan="1"></td></tr></tbody></table></div></div></div></div></td></tr></tbody></table></div></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- /.content -->
+                </div>
+            </div>
+            <!-- ./cotainer -->
+        </div>
+        <!-- ./page-content -->
+    </div>
+    <!-- ./page-content-wrapper -->
+</div>
+<!-- ./page-wrapper -->
+
+
+
+<!-- Preloader -->
+
+<div th:replace="layouts/preloader :: preloader"> </div>
+
+<!-- End Preloader -->
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script th:src="@{plugins/jQuery/jquery-3.2.1.min.js}" src="../static/plugins/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+<!-- jquery-ui -->
+<script th:src="@{plugins/jquery-ui-1.12.1/jquery-ui.min.js}" src="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script th:src="@{bootstrap/js/bootstrap.min.js}" src="../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- materialize  -->
+<script th:src="@{plugins/materialize/js/materialize.min.js}" src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<!-- metismenu-master -->
+<script th:src="@{plugins/metismenu-master/dist/metisMenu.min.js}" src="../static/plugins/metismenu-master/dist/metisMenu.min.js" type="text/javascript"></script>
+<!-- m-custom-scrollbar -->
+<script th:src="@{plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js}" src="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+<!-- scroll -->
+<script th:src="@{plugins/simplebar/dist/simplebar.js}" src="../static/plugins/simplebar/dist/simplebar.js" type="text/javascript"></script>
+<!-- fullcalendar js -->
+<script th:src="@{plugins/fullcalendar/lib/moment.min.js}" src="../static/plugins/fullcalendar/lib/moment.min.js" type="text/javascript"></script>
+<script th:src="@{plugins/fullcalendar/fullcalendar.min.js}" src="../static/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<!-- custom js -->
+<script th:src="@{dist/js/custom.js}" src="../static/dist/js/custom.js" type="text/javascript"></script>
+<!-- End Core Plugins
+<!-- Start Theme label Script
+=====================================================================-->
+<!-- main js -->
+<script th:src="@{dist/js/main.js}" src="../static/dist/js/main.js" type="text/javascript"></script>
+
+<!-- End Theme label Script
+    =====================================================================-->
+<script>
+    $(document).ready(function () {
+        "use strict";
+
+// sidebar list activation
+        $("#side-menu li").click(function () {
+            $(".clndr").css("background-color", "transparent");
+        });
+        /* initialize the external events
+         -----------------------------------------------------------------*/
+        $('#external-events .fc-event').each(function () {
+            // store data so the calendar knows to render an event upon drop
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+                zIndex: 999,
+                revert: true, // will cause the event to go back to its
+                revertDuration: 0 //  original position after the drag
+            });
+
+        });
+
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            defaultDate: '2016-12-12',
+            navLinks: true, // can click day/week names to navigate views
+            businessHours: true, // display business hours
+            editable: true,
+            droppable: true, // this allows things to be dropped onto the calendar
+            drop: function () {
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                    // if so, remove the element from the "Draggable Events" list
+                    $(this).remove();
+                }
+            },
+            events: [{
+                title: 'Business Lunch',
+                start: '2016-12-03T13:00:00',
+                constraint: 'businessHours'
+            }, {
+                title: 'Meeting',
+                start: '2016-12-13T11:00:00',
+                constraint: 'availableForMeeting', // defined below
+                color: '#37a000'
+            }, {
+                title: 'Conference',
+                start: '2016-12-18',
+                end: '2016-12-20'
+            }, {
+                title: 'Party',
+                start: '2016-12-29T20:00:00'
+            },
+                // areas where "Meeting" must be dropped
+                {
+                    id: 'availableForMeeting',
+                    start: '2016-12-11T10:00:00',
+                    end: '2016-12-11T16:00:00',
+                    rendering: 'background'
+                }, {
+                    id: 'availableForMeeting',
+                    start: '2016-12-13T10:00:00',
+                    end: '2016-12-13T16:00:00',
+                    rendering: 'background'
+                },
+                // red areas where no events can be dropped
+                {
+                    start: '2016-12-24',
+                    end: '2016-12-28',
+                    overlap: false,
+                    rendering: 'background',
+                    color: '#ff9f89'
+                }, {
+                    start: '2016-12-06',
+                    end: '2016-12-08',
+                    overlap: false,
+                    rendering: 'background',
+                    color: '#ff9f89'
+                }
+            ]
+        });
+
+    });
+</script>
+</body>
+</html>

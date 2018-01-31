@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialize Bootstrap Admin panel</title>
+</head>
+<body>
+<nav th:fragment="header" class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Logo -->
+    <a th:style="'padding-top:1em;'" style="" class="navbar-brand pull-left" href="index.html">
+       <h3 >Medicis Admin Panel</h3>
+    </a>
+    <a id="menu-toggle">
+        <i class="material-icons">apps</i>
+    </a>
+    <div class="navbar-custom-menu hidden-xs">
+        <ul class="nav navbar-nav navbar-left hidden-xs">
+            <li class="top-search "><a href="#search"><i class="material-icons">search</i></a></li>
+            <li>
+                <div id="search" class="top-search">
+                    <button type="button" class="close">x</button>
+                    <form>
+                        <input type="search" value="" placeholder="type For searching..." />
+                        <button type="submit" class="btn">Search</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar navbar-right">
+            <li class="dropdown">
+                <p class="dropdown-toggle" th:text="${activeUser}" style=" font-weight: 600; font-size: 1.2em; color:#17B6A4;">
+                    Username
+                </p>
+            </li>
+            <!--user profile-->
+            <li class="dropdown">
+                <a class='dropdown-button user-pro' href='#' data-activates='dropdown-user'>
+
+                    <img th:src="@{dist/img/avatar5.png}" src="../../static/dist/img/avatar5.png" class="img-circle" height="45" width="50" alt="User Image" />
+                </a>
+                <ul id='dropdown-user' class='dropdown-content'>
+                    <li>
+                        <a href="#!"><i class="material-icons">perm_identity</i> View profile</a>
+                    </li>
+                    <li>
+                        <a href="#!"><i class="material-icons">settings</i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="#!" onclick="logout()"><i class="material-icons">lock</i> Logout</a>
+                        <form th:id="logoutForm" th:action="@{/logout}" method="POST">
+
+                        </form>
+                        <script>
+                            function logout() {
+                                document.getElementById("logoutForm").submit();
+                            }
+                        </script>
+                    </li>
+                </ul>
+            </li>
+            <!-- /.user profile -->
+        </ul>
+    </div>
+</nav>
+
+<!-- Sidebar -->
+<div th:fragment="header" id="sidebar-wrapper" class="waves-effect" data-simplebar>
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="list-header">Main Navigation ---</li>
+                <li class="active-link"><a href="/dashboard" th:href="@{/dashboard}"><i class="material-icons">dashboard</i>Dashboard</a></li>
+                <li class="list-divider"></li>
+                <li class="list-header">Component ---</li>
+                <li>
+                    <a><i class="material-icons">supervisor_account</i>Users<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="/add-user" th:href="@{/add-user}">Add User</a></li>
+                        <li><a href="/overview-users" th:href="@{/overview-users}">Overview Users</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a><i class="material-icons">local_hospital</i>Hospitals<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="/add-hospital" th:href="@{/add-hospital}">Add Hospital</a></li>
+                        <li><a href="/overview-hospitals" th:href="@{/overview-hospitals}">Overview Hospitals</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/overview-appointments" th:href="@{/overview-appointments}"><i class="material-icons">create</i>Appointments
+                    </a>
+                </li>
+                <li>
+                    <a href="/overview-admins" th:href="@{/overview-admins}"><i class="material-icons">contacts</i>Admins
+                    </a>
+                </li>
+                <li class="list-divider"></li>
+
+                <li class="side-last"></li>
+            </ul>
+            <!-- ./sidebar-nav -->
+        </div>
+        <!-- ./sidebar -->
+    </div>
+    <!-- ./sidebar-nav -->
+</div>
+<!--<script>
+    var url=window.location.href.replace('http://triptal.ba/','');
+    var prethodni;
+    var voznja=url.indexOf("voznja");
+    var voznje=url.indexOf("voznje");
+    var objaviVoznju=url.indexOf("objavi");
+    if(url ==='voznje' || voznja!==-1|| voznje!==-1|| url.includes("profil-korisnika")){
+        prethodni=document.getElementsByClassName('current-menu-parent')
+        prethodni[0].classList.remove('current-menu-parent');
+        var id=document.getElementById('voznje');
+        id.classList.add('current-menu-parent');
+    }
+    if(url ==='onama'){
+        prethodni=document.getElementsByClassName('current-menu-parent')
+        prethodni[0].classList.remove('current-menu-parent');
+        var id=document.getElementById('onama');
+        id.classList.add('current-menu-parent');
+    }
+    if(url ==='kontakt'){
+        prethodni=document.getElementsByClassName('current-menu-parent')
+        prethodni[0].classList.remove('current-menu-parent');
+        var id=document.getElementById('kontakt');
+        id.classList.add('current-menu-parent');
+    }
+    if(url ==='voznje-korisnika' || url ==='profil' || url ==='postavke' || url ==='recenzije' || url ==='prijava-registracija'|| objaviVoznju!==-1 ||
+        url.includes("otkazane-voznje") || url.includes("zahtjevi") || url.includes("vozila-korisnika") || url.includes("vase-recenzije") ||
+        url.includes("ostavljene-recenzije") || url.includes("profilna")){
+        prethodni=document.getElementsByClassName('current-menu-parent')
+        prethodni[0].classList.remove('current-menu-parent');
+        var id=document.getElementById('korisnik');
+        id.classList.add('current-menu-parent');
+    }
+
+
+</script>-->
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Materialize Bootstrap Admin panel</title>
+
+    <!-- Start Global Mandatory Style
+         =====================================================================-->
+    <!-- Material Icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap css-->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Animation Css -->
+    <link href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <!-- materialize css -->
+    <link href="../static/plugins/materialize/css/materialize.min.css" rel="stylesheet">
+    <!-- custom CSS -->
+    <link href="../static/dist/css/stylematerial.css" rel="stylesheet">
+</head>
+
+<body class="sign-section">
+<div class="container sign-cont animated zoomIn">
+    <div class="row">
+
+        <div  th:if="${badCredentials} != null"  class="alert alert-danger z-depth-1">
+            <strong>Email or password</strong> is wrong!
+        </div>
+
+    </div>
+    <div class="row sign-row">
+        <div class="sign-title">
+            <h2 class="teal-text"><i class="fa fa-user-circle-o"></i></h2>
+            <h2 class="teal-text">Login</h2>
+        </div>
+        <form method="post" th:action="@{'/login'}" class="col s12" id="login-form">
+
+            <div class="row sign-row">
+                <div class="input-field col s12">
+                    <input id="email" name="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row sign-row">
+                <div class="input-field col s12">
+                    <input id="password" name="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row sign-row">
+                <div class="input-field col s6">
+                    <div class="sign-confirm">
+                        <input type="checkbox" id="sign-confirm" />
+                        <label for="sign-confirm">Remember me!</label>
+                    </div>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn btn-large btn-register waves-effect waves-light green" type="submit" name="action">Login
+                        <i class="material-icons right">done_all</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <a title="Login" class="sign-btn btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">perm_identity</i></a>
+</div>
+
+<div class="modal animated zoomIn" id="zoomIn" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="waves-effect waves-light btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script src="../static/plugins/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+<!-- materialize  -->
+<script src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<!-- End Core Plugins
+     =====================================================================-->
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Medicis | Admin Login</title>
+
+    <!-- Material Icons CSS -->
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!-- Font Awesome -->
+    <link href="../static/font-awesome/css/font-awesome.min.css"
+          th:href="@{font-awesome/css/font-awesome.min.css}"  rel="stylesheet" type="text/css" />
+    <!-- Animation Css -->
+    <link  href="../static/plugins/animate/animate.css"
+           th:href="@{plugins/animate/animate.css}" rel="stylesheet" />
+    <!-- materialize css -->
+    <link href="../static/plugins/materialize/css/materialize.min.css"
+          th:href="@{plugins/materialize/css/materialize.min.css}"  rel="stylesheet" />
+    <!-- custom CSS -->
+    <link href="../static/dist/css/stylematerial.css"
+          th:href="@{dist/css/stylematerial.css}"  rel="stylesheet" />
+</head>
+<body class="sign-section">
+<div class="container sign-cont animated zoomIn">
+    <div class="row sign-row">
+        <div class="sign-title">
+            <h2 class="teal-text"><i class="fa fa-user-circle-o"></i></h2>
+            <h2 class="teal-text">Login</h2>
+        </div>
+        <form  class="col s12" id="reg-form">
+            <div class="row sign-row">
+                <div class="input-field col s12">
+                    <input th:id="u_name"  th:type="text"  class="validate" th:required="required" />
+                    <label th:for="u_name">User Name</label>
+                </div>
+            </div>
+            <div class="row sign-row">
+                <div class="input-field col s12">
+                    <input th:id="password" type="password" class="validate" th:required="required" />
+                    <label th:for="password">Password</label>
+                </div>
+            </div>
+            <div class="row sign-row">
+                <div class="input-field col s6">
+                    <div class="sign-confirm">
+                        <input type="checkbox" id="sign-confirm" />
+                        <label for="sign-confirm">Remember me!</label>
+                    </div>
+                </div>
+                <div class="input-field col s6">
+                    <button class="btn btn-large btn-register waves-effect waves-light green" type="submit" name="action">Login
+                        <i class="material-icons right">done_all</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <a title="Login" class="sign-btn btn-floating btn-large waves-effect waves-light green">
+        <i class="material-icons">perm_identity</i></a>
+</div>
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script src="../static/plugins/jQuery/jquery-3.2.1.min.js" type="text/javascript"
+        th:src="@{/plugins/jQuery/jquery-3.2.1.min.js}"></script>
+<!-- materialize  -->
+<script src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"
+        th:src="@{/plugins/materialize/js/materialize.min.js}"></script>
+<!-- End Core Plugins
+     =====================================================================-->
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+</body>
+</html>
