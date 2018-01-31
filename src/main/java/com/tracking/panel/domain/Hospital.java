@@ -22,9 +22,22 @@ public class Hospital {
     @Column(nullable = false)
     @NotEmpty(message = "*Please provide city of Hospital")
     private String city;
-    @OneToMany(mappedBy = "hospital_id",cascade = CascadeType.ALL)
+    @NotBlank
+    @Column(nullable = false)
+    @NotEmpty(message = "*Please provide postal code of Hospital")
+    private String postalCode;
+    @NotBlank
+    @Column(nullable = false)
+    @NotEmpty(message = "*Please provide address of Hospital")
+    private String address;
+    @NotBlank
+    @Column(nullable = false)
+    @NotEmpty(message = "*Please provide address of Hospital")
+    private String aboutHospital;
+
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
     private Set<HospitalsImages> hospitalsImages;
-    @OneToMany(mappedBy = "hospital_id",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
     private Set<HospitalEmploye> hospitalsEmployee;
 
     public Hospital() {

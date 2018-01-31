@@ -57,5 +57,8 @@ public class HospitalEmploye {
 
     @Column(name="role",columnDefinition="VARCHAR(45)")
     private String role;
+    @ManyToOne
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 
 }
