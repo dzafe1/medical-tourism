@@ -13,15 +13,15 @@ xmlns:th="http://www.thymeleaf.org">
     <!-- Material Icons CSS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap css-->
-    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
     <!-- Animation Css -->
-    <link href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <link th:href="@{plugins/animate/animate.css}" rel="stylesheet" />
     <!-- materialize css -->
-    <link href="../static/plugins/materialize/css/materialize.min.css" rel="stylesheet">
+    <link th:href="@{plugins/materialize/css/materialize.min.css}" rel="stylesheet">
     <!-- custom CSS -->
-    <link href="../static/dist/css/stylematerial.css" rel="stylesheet">
+    <link th:href="@{dist/css/stylematerial.css}" rel="stylesheet">
 </head>
 
 <body class="sign-section">
@@ -95,9 +95,9 @@ xmlns:th="http://www.thymeleaf.org">
 <!-- Start Core Plugins
      =====================================================================-->
 <!-- jQuery -->
-<script src="../static/plugins/jQuery/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script th:src="@{plugins/jQuery/jquery-3.2.1.min.js}" type="text/javascript"></script>
 <!-- materialize  -->
-<script src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<script th:src="@{plugins/materialize/js/materialize.min.js}" type="text/javascript"></script>
 <!-- End Core Plugins
      =====================================================================-->
 <script>
