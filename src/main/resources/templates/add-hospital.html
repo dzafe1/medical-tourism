@@ -81,7 +81,7 @@
 
                                 </div>
 -->
-                                <form action="/add-hospital" id="form" method="post" class="form-horizontal">
+                                <form action="/add-hospital" th:action="@{/add-hospital}" id="form" enctype="multipart/form-data" method="post" class="form-horizontal">
                                     <div id="rootwizard">
                                         <ul>
                                             <li><a href="#tab1" data-toggle="tab">General Information's</a></li>
@@ -91,8 +91,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane" id="tab1">
                                             <h2 class="text-center">Add Hospital</h2>
-
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label class="col-md-4 control-label">Hospital's Name:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
@@ -101,7 +100,7 @@
                                                         </div>
                                                         <label for="fullName" class="error"></label>
                                                     </div>
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label class="col-md-4 control-label">Hospital's City:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
@@ -110,7 +109,7 @@
                                                         </div>
                                                         <label for="hospitalCity" class="error"></label>
                                                     </div>
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label class="col-md-4 control-label">Hospital's Postal Code:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
@@ -119,7 +118,7 @@
                                                         </div>
                                                         <label for="postalCode" class="error"></label>
                                                     </div>
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label for="address" class="col-md-4 control-label">Hospital's Address:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
@@ -128,82 +127,86 @@
                                                         </div>
                                                         <label for="address" class="error"></label>
                                                     </div>
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label for="about" class="col-md-4 control-label">About Hospital:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
-                                                                <textarea rows="5" id="about" name="about"  class="validate form-control" placeholder="About..."></textarea>
+                                                                <textarea rows="5" id="about" name="about" class="validate form-control" placeholder="About..."></textarea>
                                                             </div>
                                                         </div>
                                                         <label for="about" class="error"></label>
                                                     </div>
                                             </div>
-
                                             <div class="tab-pane" id="tab2">
-                                                <div class="form-section">
-                                                    <div class="form-group">
-                                                        <label class="col-md-4 control-label" for="pictures">Upload Pictures:</label>
+                                                <div class="form-group">
+                                                        <label class="col-md-4 control-label">Upload Pictures:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
-                                                                <input name="file" id="pictures" class="form-control" type="file" multiple />
+                                                                <input name="hospitalPictures" id="hospitalPictures" class="form-control" type="file" multiple />
                                                             </div>
                                                         </div>
-                                                        <label for="pictures" class="error"></label>
+                                                        <label for="hospitalPictures" class="error"></label>
                                                     </div>
-                                                </div>
                                             </div>
                                             <div class="tab-pane" id="tab3">
-                                                    <div class="form-group">
-                                                        <label  class="col-md-4 control-label">Add Employee's First Name:</label>
-                                                        <div class="col-md-4">
-                                                            <div class="input-field">
-                                                                <input type="text" name="employeeFname[]" id="employeeFname"  class="validate" placeholder="First Name">
+                                                        <div id="field">
+                                                            <div id="field0">
+                                                                <div class="form-group">
+                                                                    <label  class="col-md-4 control-label">Add Employee's First Name:</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-field">
+                                                                            <input type="text" name="employeeFname[]" class="validate" placeholder="First Name">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label  class="col-md-4 control-label">Add Employee's Last Name:</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-field">
+                                                                            <input type="text" name="employeeLname[]" class="validate" placeholder="Last Name">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label  class="col-md-4 control-label">Select role:</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-field">
+                                                                            <select type="text" name="employeeRole[]" class="validate required form-control">
+                                                                                <option selected disabled>Choose role</option>
+                                                                                <option value="Doctor">Doctor</option>
+                                                                                <option value="Manager">Manager</option>
+                                                                                <option value="Technician">Technician</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Upload Pictures:</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-field">
+                                                                            <input name="employeePictures[]" class="form-control" type="file" multiple />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <label for="employeeFname" class="error"></label>
-                                                    </div>
-                                                <div class="form-group">
-                                                    <label  class="col-md-4 control-label">Add Employee's Last Name:</label>
-                                                    <div class="col-md-4">
-                                                        <div class="input-field">
-                                                            <input type="text" name="employeeLname[]" id="employeeLname"  class="validate" placeholder="Last Name">
-                                                        </div>
-                                                    </div>
-                                                    <label for="employeeLname" class="error"></label>
-                                                </div>
-                                                    <div class="form-group">
-                                                        <label  class="col-md-4 control-label">Select role:</label>
-                                                        <div class="col-md-4">
-                                                            <div class="input-field">
-                                                                <select type="text" name="employeeRole[]" id="employeeRole"  class="validate required form-control">
-                                                                    <option selected disabled>Choose role</option>
-                                                                    <option value="Doctor">Doctor</option>
-                                                                    <option value="Manager">Manager</option>
-                                                                    <option value="Technician">Technician</option>
-                                                                </select>
+                                                        <!-- Button -->
+                                                        <div class="row">
+                                                            <div class="col-md-offset-4 col-md-4">
+                                                                <button id="add-more" name="add-more" class="btn btn-primary">Add More</button>
                                                             </div>
                                                         </div>
-                                                        <label for="employeeRole" class="error"></label>
-                                                    </div>
-                                                <button id="addMore" class="btn btn-info">Add more employees<span class="glyphicon glyphicon-plus"></span></button>
                                             </div>
+                                        </div>
+
+
                                             <ul class="pager wizard">
                                                 <li class="previous"><a href="javascript:;">Previous</a></li>
                                                 <li class="next"><a href="javascript:;">Next</a></li>
                                                 <li class="finish "><a class="btn btn-success" href="javascript:;" style="background-color:#5cb85c; border: 0;">Submit</a></li>
                                             </ul>
                                         </div>
-                                        <!--<section>
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label"></label>
-                                                <div class="col-md-4">
-                                                    <button type="button" class="previous btn btn-success">Previous <span class="glyphicon glyphicon-chevron-left"></span></button>
-                                                    <button type="button" class="next btn btn-success">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
-                                                    <button type="submit" class="previous btn btn-success">Submit <span class="glyphicon glyphicon-send"></span></button>
-                                                </div>
-                                            </div>
-                                        </section>-->
-                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -267,45 +270,88 @@
 <!-- End Theme label Script
      =====================================================================-->
 <script>
+    $(document).ready(function () {
+        var next = 0;
+        $("#add-more").click(function(e){
+            e.preventDefault();
+            var addto = "#field" + next;
+            var addRemove = "#field" + (next);
+            next = next + 1;
+            var newIn = ' <div id="field'+ next +'" name="field'+ next +'">   <div class="form-group">\n' +
+                '                                                                    <label  class="col-md-4 control-label">Add Employee\'s First Name:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <div class="input-field">\n' +
+                '                                                                            <input type="text" name="employeeFname[]" id="employeeFname[]"  class="validate" placeholder="First Name">\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                    <label for="employeeFname[]" class="error"></label>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="form-group">\n' +
+                '                                                                    <label  class="col-md-4 control-label">Add Employee\'s Last Name:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <div class="input-field">\n' +
+                '                                                                            <input type="text" name="employeeLname[]" id="employeeLname[]"  class="validate" placeholder="Last Name">\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                    <label for="employeeLname[]" class="error"></label>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="form-group">\n' +
+                '                                                                    <label  class="col-md-4 control-label">Select role:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <div class="input-field">\n' +
+                '                                                                            <select type="text" name="employeeRole[]" id="employeeRole[]" class="validate required form-control">\n' +
+                '                                                                                <option selected disabled>Choose role</option>\n' +
+                '                                                                                <option value="Doctor">Doctor</option>\n' +
+                '                                                                                <option value="Manager">Manager</option>\n' +
+                '                                                                                <option value="Technician">Technician</option>\n' +
+                '                                                                            </select>\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                    <label for="employeeRole[]" class="error"></label>\n' +
+                '                                                                </div>' +
+                '                                                               <div class="form-group">\n' +
+                '                                                                    <label class="col-md-4 control-label" for="pictures">Upload Pictures:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <div class="input-field">\n' +
+                '                                                                            <input name="doctorsPictures[]" class="form-control" type="file" multiple />\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>' +
+                '';
+            var newInput = $(newIn);
+            var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >Remove</button></div></div><div id="field">';
+            var removeButton = $(removeBtn);
+            $(addto).after(newInput);
+            $(addRemove).after(removeButton);
+            $("#field" + next).attr('data-source',$(addto).attr('data-source'));
+            $("#count").val(next);
 
-    $(document).ready(function() {
-        $("#addMore").click(function(e) {
+            $('.remove-me').click(function(e){
                 e.preventDefault();
-                $("#tab3").append(
-                    "<div class='form-group'>" +
-                    "<label  class='col-md-4 control-label'>Add Employee's First Name:</label>" +
-                    "<div class='col-md-4'>" +
-                    "<div class='input-field'>" +
-                    "<input type='text' name='employeeFname[]' placeholder='First Name' />" +
-                    "</div>" +
-                    "</div>"+
-                    "</div>");
-                $("#tab3").append(
-                "<div class='form-group'>" +
-                "<label  class='col-md-4 control-label'>Add Employee's Last Name:</label>" +
-                "<div class='col-md-4'>" +
-                "<div class='input-field'>" +
-                "<input type='text' name='employeeLname[]' placeholder='Last Name' />" +
-                "</div>" +
-                "</div>"+
-                "</div>");
-                $("#tab3").append(
-                "<div class='form-group'>" +
-                "<label  class='col-md-4 control-label'>Select role::</label>" +
-                "<div class='col-md-4'>" +
-                "<div class='input-field'>" +
-                "<select type='text' name='employeeRole[]' id='employeeRole'  class='validate required form-control'>" +
-                    "<option selected disabled>Choose role</option>" +
-                    "<option value='Doctor'>Doctor</option>" +
-                    "<option value='Manager'>Manager</option>" +
-                    "<option value='Technician'>Technician</option>" +
-                    "</select>" +
-                "</div>" +
-                "</div>"+
-                "</div>");
+                var fieldNum = this.id.charAt(this.id.length-1);
+                var fieldID = "#field" + fieldNum;
+                $(this).remove();
+                $(fieldID).remove();
+            });
         });
 
+    });
+
+    $(document).ready(function() {
         var $validator = $("#form").validate({
+            checkForm: function() {
+                this.prepareForm();
+                for ( var i = 0, elements = (this.currentElements = this.elements()); elements[i]; i++ ) {
+                    if (this.findByName( elements[i].name ).length != undefined && this.findByName( elements[i].name ).length > 1) {
+                        for (var cnt = 0; cnt < this.findByName( elements[i].name ).length; cnt++) {
+                            this.check( this.findByName( elements[i].name )[cnt] );
+                        }
+                    } else {
+                        this.check( elements[i] );
+                    }
+                }
+                return this.valid();
+            },
             rules: {
                 fullName: {
                     required: true,
@@ -327,19 +373,21 @@
                     required: true,
                     minlength: 20
                 },
-                pictures:{
-                    required: true,
-                    accept: "image/*"
+                hospitalPictures:{
+                    required: true
                 },
-                employeeFname:{
-                    required: true,
-                    minlength: 3
-                },
-                employeeLname:{
+                'employeeFname[]':{
                     required: true,
                     minlength: 3
                 },
-                employeeRole:{
+                'employeeLname[]':{
+                    required: true,
+                    minlength: 3
+                },
+                'employeeRole[]':{
+                    required: true
+                },
+                'employeePictures[]':{
                     required: true
                 }
             }
@@ -352,6 +400,15 @@
                 if(!$valid) {
                     $validator.focusInvalid();
                     return false;
+                }
+            },
+            'onFinish': function() {
+                var $valid = $("#form").valid();
+                if(!$valid) {
+                    $validator.focusInvalid();
+                    return false;
+                }else {
+                    document.getElementById("form").submit();
                 }
             },
             onTabClick: function(tab, navigation, index) {
