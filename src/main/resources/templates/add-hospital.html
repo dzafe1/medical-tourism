@@ -104,7 +104,7 @@
                                                         <label class="col-md-4 control-label">Hospital's City:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
-                                                                <input name="city" id="hospitalCity" type="text" class="validate form-control" placeholder="City">
+                                                                <input name="city" id="hospitalCity" type="text" class="validate form-control" placeholder="City" onfocus="initAutocomplete()">
                                                             </div>
                                                         </div>
                                                         <label for="hospitalCity" class="error"></label>
@@ -113,7 +113,7 @@
                                                         <label class="col-md-4 control-label">Hospital's Postal Code:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
-                                                                <input name="postalCode" id="postalCode" type="text" class="validate form-control" placeholder="Postal Code" >
+                                                                <input name="postalCode" id="postalCode" type="number" class="validate form-control" placeholder="Postal Code" >
                                                             </div>
                                                         </div>
                                                         <label for="postalCode" class="error"></label>
@@ -122,7 +122,7 @@
                                                         <label for="address" class="col-md-4 control-label">Hospital's Address:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-field">
-                                                                <input name="address" id="address" type="text" class="validate form-control" placeholder="Address">
+                                                                <input name="address" id="address" type="text" class="validate form-control" placeholder="Address" onfocus="initAutocomplete()">
                                                             </div>
                                                         </div>
                                                         <label for="address" class="error"></label>
@@ -168,10 +168,24 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
+                                                                    <label  class="col-md-4 control-label">Add Employee's Email:</label>
+                                                                    <div class="col-md-4">
+                                                                        <div class="input-field">
+                                                                            <input type="email" name="employeeEmail[]" class="validate" placeholder="Email">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Add Employee's Date of birth:</label>
+                                                                    <div class="col-md-4">
+                                                                        <input class="datepicker" name="dob[]" type="text" placeholder="Date of Birth">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
                                                                     <label  class="col-md-4 control-label">Select role:</label>
                                                                     <div class="col-md-4">
                                                                         <div class="input-field">
-                                                                            <select type="text" name="employeeRole[]" class="validate required form-control">
+                                                                            <select type="text" name="employeeTitle[]" class="validate required form-control">
                                                                                 <option selected disabled>Choose role</option>
                                                                                 <option value="Doctor">Doctor</option>
                                                                                 <option value="Manager">Manager</option>
@@ -184,7 +198,7 @@
                                                                     <label class="col-md-4 control-label">Upload Pictures:</label>
                                                                     <div class="col-md-4">
                                                                         <div class="input-field">
-                                                                            <input name="employeePictures[]" class="form-control" type="file" multiple />
+                                                                            <input name="employeePictures[]" class="form-control" type="file" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -206,7 +220,6 @@
                                                 <li class="finish "><a class="btn btn-success" href="javascript:;" style="background-color:#5cb85c; border: 0;">Submit</a></li>
                                             </ul>
                                         </div>
-
                                 </form>
                             </div>
                         </div>
@@ -269,6 +282,28 @@
 <script th:src="@{dist/js/main.js}" src="../static/dist/js/main.js" type="text/javascript"></script>
 <!-- End Theme label Script
      =====================================================================-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKFDdqpwblWFuo7NUI07rtjKnMTWnPMeY&libraries=places&region=BA&language=hr"></script>
+<script>
+    function initAutocomplete() {
+        autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('hospitalCity'), {types: ['geocode']});
+        autocomplete1.addListener('place_changed', function () {
+            var place = autocomplete1.getPlace();
+            if (!place.geometry) {
+                window.alert("Nismo mogli prona?i traženo mjesto!");
+                return;
+            }
+        });
+        autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('address'), {types: ['geocode']});
+        autocomplete2.addListener('place_changed', function () {
+            var place = autocomplete2.getPlace();
+            if (!place.geometry) {
+                window.alert("Nismo mogli prona?i traženo mjesto!");
+                return;
+            }
+        });
+    }
+</script>
+
 <script>
     $(document).ready(function () {
         var next = 0;
@@ -295,11 +330,25 @@
                 '                                                                    </div>\n' +
                 '                                                                    <label for="employeeLname[]" class="error"></label>\n' +
                 '                                                                </div>\n' +
+                '                                                                   <div class="form-group">\n' +
+                '                                                                    <label  class="col-md-4 control-label">Add Employee\'s Email:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <div class="input-field">\n' +
+                '                                                                            <input type="email" name="employeeEmail[]" class="validate" placeholder="Email">\n' +
+                '                                                                        </div>\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>\n' +
+                '                                                                <div class="form-group">\n' +
+                '                                                                    <label class="col-md-4 control-label">Add Employee\'s Date of birth:</label>\n' +
+                '                                                                    <div class="col-md-4">\n' +
+                '                                                                        <input class="datepicker" name="dob[]" type="text" placeholder="Date of Birth">\n' +
+                '                                                                    </div>\n' +
+                '                                                                </div>' +
                 '                                                                <div class="form-group">\n' +
                 '                                                                    <label  class="col-md-4 control-label">Select role:</label>\n' +
                 '                                                                    <div class="col-md-4">\n' +
                 '                                                                        <div class="input-field">\n' +
-                '                                                                            <select type="text" name="employeeRole[]" id="employeeRole[]" class="validate required form-control">\n' +
+                '                                                                            <select type="text" name="employeeTitle[]" id="employeeTitle[]" class="validate required form-control">\n' +
                 '                                                                                <option selected disabled>Choose role</option>\n' +
                 '                                                                                <option value="Doctor">Doctor</option>\n' +
                 '                                                                                <option value="Manager">Manager</option>\n' +
@@ -307,7 +356,7 @@
                 '                                                                            </select>\n' +
                 '                                                                        </div>\n' +
                 '                                                                    </div>\n' +
-                '                                                                    <label for="employeeRole[]" class="error"></label>\n' +
+                '                                                                    <label for="employeeTitle[]" class="error"></label>\n' +
                 '                                                                </div>' +
                 '                                                               <div class="form-group">\n' +
                 '                                                                    <label class="col-md-4 control-label" for="pictures">Upload Pictures:</label>\n' +
@@ -333,6 +382,14 @@
                 $(this).remove();
                 $(fieldID).remove();
             });
+            $('.datepicker').each(function () {
+                $(this).pickadate({
+                    format: 'mm/dd/yyyy',
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 35 // Creates a dropdown of 15 years to control year
+                })
+            });
+
         });
 
     });
@@ -384,7 +441,15 @@
                     required: true,
                     minlength: 3
                 },
-                'employeeRole[]':{
+                'employeeEmail[]':{
+                    required: true,
+                    minlength: 3,
+                    email: true
+                },
+                'dob[]':{
+                    required: true
+                },
+                'employeeTitle[]':{
                     required: true
                 },
                 'employeePictures[]':{
@@ -415,8 +480,20 @@
                 return false;
             }
         });
+        //datepicker
+        $('.datepicker').pickadate({
+            format: 'mm/dd/yyyy',
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 35 // Creates a dropdown of 15 years to control year
+        });
+
+
+
     });
+
+
 </script>
+
 
 
 </body>

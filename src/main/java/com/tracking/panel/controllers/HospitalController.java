@@ -27,10 +27,8 @@ public class HospitalController{
                               @RequestParam("postalCode")String postalCode, @RequestParam("address")String address,
                               @RequestParam("about")String about, @RequestParam("hospitalPictures")MultipartFile hospitalPictures,
                               @RequestParam("employeeFname[]")List<String> employeeFname, @RequestParam("employeeLname[]")List<String> employeeLname,
-                              @RequestParam("employeeRole[]")List<String> employeeRole, @RequestParam("employeePictures[]")List<MultipartFile> employeePictures){
-        for(String number : employeeRole) {
-            System.out.println(number);
-        }
+                              @RequestParam("employeeTitle[]")List<String> employeeTitle, @RequestParam("employeePictures[]")List<MultipartFile> employeePictures){
+
         return "add-hospital";
     }
     @RequestMapping(value = "/overview-hospitals")
