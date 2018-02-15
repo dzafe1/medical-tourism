@@ -1,10 +1,8 @@
 package com.tracking.panel.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -13,9 +11,7 @@ public class HospitalsImages {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    @NotNull
-    @NotBlank
-    @Max(value = 255)
+    @NotEmpty(message = "*Please provide image Hospital")
     private String path;
     @ManyToOne
     @JoinColumn(name = "hospital_id")
@@ -28,6 +24,7 @@ public class HospitalsImages {
         this.path = path;
         this.hospital = hospital;
     }
+
 
     public Long getId() {
         return id;

@@ -75,7 +75,7 @@
                                 <div  th:if="${adminInserted} != null" class="alert alert-success z-depth-1">
                                     <strong>Success!</strong> New admin inserted.
                                 </div>
-                                <form action="#" th:action="@{/add-admin}" th:object="${user}" id="form" method="post" class="form-horizontal">
+                                <form action="#" th:action="@{/add-admin}"  id="form" method="post" class="form-horizontal">
                                     <input type="hidden"
                                            th:name="${_csrf.parameterName}"
                                            th:value="${_csrf.token}" />

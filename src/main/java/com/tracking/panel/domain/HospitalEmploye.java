@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -21,7 +22,6 @@ public class HospitalEmploye {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     @NotEmpty(message = "Please provide doctor's First name!")
     @Size(min=2, max=30,message = "First name must be greater then 2 characters!")
@@ -57,9 +57,6 @@ public class HospitalEmploye {
     @Column(name="is_active",columnDefinition="TINYINT(1) default '1'")
     private Boolean active=true;
 
-    @Column(name="role",columnDefinition="VARCHAR(45)")
-    private String role;
-
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
@@ -67,20 +64,16 @@ public class HospitalEmploye {
     public HospitalEmploye() {
     }
 
-    public HospitalEmploye(String fName, String lName, String email, String imgPath, String title, Date dob, Date created_at, Date updated_at, Boolean active, String role, Hospital hospital) {
+    public HospitalEmploye(String fName, String lName, String email, String imgPath, String title, Date dob, Boolean active, Hospital hospital) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.imgPath = imgPath;
         this.title = title;
         this.dob = dob;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
         this.active = active;
-        this.role = role;
         this.hospital = hospital;
     }
-
     public Long getId() {
         return id;
     }
@@ -161,13 +154,6 @@ public class HospitalEmploye {
         this.active = active;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public Hospital getHospital() {
         return hospital;
@@ -190,7 +176,6 @@ public class HospitalEmploye {
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", active=" + active +
-                ", role='" + role + '\'' +
                 ", hospital=" + hospital +
                 '}';
     }
