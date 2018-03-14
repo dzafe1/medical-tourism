@@ -55,7 +55,6 @@ public class HospitalsImages {
         return "HospitalsImages{" +
                 "id=" + id +
                 ", path='" + path + '\'' +
-                ", hospital=" + hospital +
                 '}';
     }
 }

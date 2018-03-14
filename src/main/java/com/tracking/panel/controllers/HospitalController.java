@@ -7,13 +7,12 @@ import com.tracking.panel.repository.HospitalEmployeeRepository;
 import com.tracking.panel.repository.HospitalRepository;
 import com.tracking.panel.repository.HospitalsImagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,9 +24,7 @@ import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
@@ -102,8 +99,26 @@ public class HospitalController{
             return "redirect:/add-hospital";
         }
     }
-    @RequestMapping(value = "/overview-hospitals")
-    public String overviewHospital(){
+    @GetMapping(value = "/overview-hospitals")
+    public String overviewHospital(ModelMap modelMap){
+        List<Hospital> hospitals=hospitalRepository.getAllHospitals();
+        modelMap.addAttribute("hospitals",hospitals);
         return "hospitals";
     }
+    @GetMapping(value = "/get-hospital-data/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Map getHospitalsData(@PathVariable Long id){
+        return Collections.singletonMap("hospital", hospitalRepository.findOneById(id));
+    }
+    @GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String test(){
+        List<HospitalEmploye> employes=hospitalRepository.findOneById(new Long(1)).getHospitalsEmployee();
+        return employes.get(1).getEmail();
+    }
+    @GetMapping(value = "/delete-hospital/{id}")
+    public String deleteHospital(Hospital hospital,RedirectAttributes redirectAttributes,@PathVariable Long id){
+        hospitalRepository.delete(id);
+        redirectAttributes.addFlashAttribute("hospitalDeleted", "Hospital deleted!");
+        return "redirect:/overview-hospitals";
+    }
 }
+

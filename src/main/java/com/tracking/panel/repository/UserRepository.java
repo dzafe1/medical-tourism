@@ -17,11 +17,10 @@ public interface UserRepository extends JpaRepository<User,Long> {
     User findOneById(Long id);
     @Query("SELECT u FROM User u where is_active=true and role='ADMIN'")
     List<User> getAllAdmins();
-    @Query("SELECT u FROM User u where admin=false")
+    @Query("SELECT u FROM User u where u.role <> 'ADMIN'")
     List<User> getAllNonAdmins();
-    @Query(nativeQuery = true,value = "SELECT count(id) FROM user WHERE is_active=true AND admin=false")
+    @Query(nativeQuery = true,value = "SELECT count(id) FROM user WHERE is_active=true AND role!='ADMIN'")
     Long getAllNonAdminsCount();
     @Query(nativeQuery = true,value = "SELECT count(id) FROM user WHERE is_active=true")
     Long getAllUsers();
-
 }

@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>panel</name>
-	<description>Instalation Tracking System</description>
+	<description>Installation Tracking System</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -64,7 +64,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>
@@ -80,7 +89,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

@@ -1,16 +1,20 @@
 package com.tracking.panel.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity
+@Where(clause="is_active = 1")
+@SQLDelete(sql="Update hospital SET is_active = 0 where id=?")
 public class Hospital {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -32,15 +36,19 @@ public class Hospital {
     @NotEmpty(message = "*Please provide address of Hospital")
     private String address;
     @NotBlank
-    @Max(value = 8000)
     @Column(nullable = false,columnDefinition="VARCHAR(8000)")
     @NotEmpty(message = "*Please provide description of Hospital")
     private String aboutHospital;
 
+    @Column(name="is_active",columnDefinition="TINYINT(1) default '1'")
+    private Boolean active=true;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
-    private Set<HospitalsImages> hospitalsImages;
+    private List<HospitalsImages> hospitalsImages;
+    @JsonIgnore
     @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
-    private Set<HospitalEmploye> hospitalsEmployee;
+    private List<HospitalEmploye> hospitalsEmployee;
     public Hospital() {
     }
     public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital) {
@@ -50,7 +58,7 @@ public class Hospital {
         this.address = address;
         this.aboutHospital = aboutHospital;
     }
-    public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital, Set<HospitalsImages> hospitalsImages, Set<HospitalEmploye> hospitalsEmployee) {
+    public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital, List<HospitalsImages> hospitalsImages, List<HospitalEmploye> hospitalsEmployee) {
         this.fullName = fullName;
         this.city = city;
         this.postalCode = postalCode;
@@ -108,19 +116,27 @@ public class Hospital {
         this.aboutHospital = aboutHospital;
     }
 
-    public Set<HospitalsImages> getHospitalsImages() {
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<HospitalsImages> getHospitalsImages() {
         return hospitalsImages;
     }
 
-    public void setHospitalsImages(Set<HospitalsImages> hospitalsImages) {
+    public void setHospitalsImages(List<HospitalsImages> hospitalsImages) {
         this.hospitalsImages = hospitalsImages;
     }
 
-    public Set<HospitalEmploye> getHospitalsEmployee() {
+    public List<HospitalEmploye> getHospitalsEmployee() {
         return hospitalsEmployee;
     }
 
-    public void setHospitalsEmployee(Set<HospitalEmploye> hospitalsEmployee) {
+    public void setHospitalsEmployee(List<HospitalEmploye> hospitalsEmployee) {
         this.hospitalsEmployee = hospitalsEmployee;
     }
 
@@ -130,6 +146,9 @@ public class Hospital {
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", city='" + city + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", address='" + address + '\'' +
+                ", aboutHospital='" + aboutHospital + '\'' +
                 '}';
     }
 }

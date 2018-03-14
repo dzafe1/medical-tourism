@@ -1,6 +1,7 @@
 package com.tracking.panel.controllers;
 
 import com.tracking.panel.domain.User;
+import com.tracking.panel.repository.HospitalRepository;
 import com.tracking.panel.repository.UserRepository;
 import com.tracking.panel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private HospitalRepository hospitalRepository;
+
+    //private String userFnameTest=userService.getUser(principal.getName()).getfName();
 
 
     @GetMapping(value = "/")
@@ -57,6 +62,8 @@ public class UserController {
         modelMap.addAttribute("usersCount",userRepository.getAllUsers());
         modelMap.addAttribute("activeUser",userFname);
         System.out.println(userService.getUser(principal.getName()));
+        Long hospitalsCount=hospitalRepository.getHospitalsCount();
+        System.out.println("Broj je: "+hospitalsCount);
         return "dashboard";
     }
     @RequestMapping("/admin-login")

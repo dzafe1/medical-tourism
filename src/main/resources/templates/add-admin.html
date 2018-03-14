@@ -75,7 +75,7 @@
                                 <div  th:if="${adminInserted} != null" class="alert alert-success z-depth-1">
                                     <strong>Success!</strong> New admin inserted.
                                 </div>
-                                <form action="#" th:action="@{/add-admin}"  id="form" method="post" class="form-horizontal">
+                                <form action="#" th:action="@{/add-admin}" th:object="${user}"  id="form" method="post" class="form-horizontal">
                                     <input type="hidden"
                                            th:name="${_csrf.parameterName}"
                                            th:value="${_csrf.token}" />
@@ -86,7 +86,7 @@
                                             <label class="col-md-4 control-label">Fist Name:</label>
                                             <div class="col-md-4">
                                                 <div class="input-field">
-                                                    <input name="fName" th:field="*{fName}"  type="text" class="validate" placeholder="First Name">
+                                                    <input th:field="*{fName}"  type="text" class="validate" placeholder="First Name">
                                                     <span th:if="${#fields.hasErrors('fName')}" class="validation" th:errors="*{fName}">Name Error</span>
                                                 </div>
                                             </div>
@@ -96,7 +96,7 @@
                                             <label class="col-md-4 control-label">Last Name:</label>
                                             <div class="col-md-4">
                                                 <div class="input-field">
-                                                    <input name="lName" th:field="*{lName}" type="text" class="validate" placeholder="Last Name">
+                                                    <input  th:field="*{lName}" type="text" class="validate" placeholder="Last Name">
                                                     <span th:if="${#fields.hasErrors('lName')}" class="validation" th:errors="*{lName}">Name Error</span>
                                                 </div>
                                             </div>
@@ -106,7 +106,7 @@
                                             <label class="col-md-4 control-label">Email:</label>
                                             <div class="col-md-4">
                                                 <div class="input-field">
-                                                    <input name="email" th:field="*{email}" type="email" class="validate" placeholder="Email">
+                                                    <input th:field="*{email}" type="email" class="validate" placeholder="Email">
                                                     <span th:if="${#fields.hasErrors('email')}" class="validation" th:errors="*{email}">Name Error</span>
                                                 </div>
                                             </div>
@@ -115,7 +115,7 @@
                                             <label class="col-md-4 control-label">Password:</label>
                                             <div class="col-md-4">
                                                 <div class="input-field">
-                                                    <input name="password" th:field="*{password}" type="password" class="validate" placeholder="Password">
+                                                    <input th:field="*{password}" type="password" class="validate" placeholder="Password">
                                                     <span th:if="${#fields.hasErrors('password')}" class="validation" th:errors="*{password}">Name Error</span>
                                                 </div>
                                             </div>

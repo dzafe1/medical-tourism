@@ -32,7 +32,7 @@ public class PanelApplication {
 		@Override
 		public void run(ApplicationArguments args) {
 			BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
-			userRepository.save(new User("Haris", "Dzafic","dzafe1987@gmail.com",bCryptPasswordEncoder.encode("123456"),"images/avatar5.png",true,"ADMIN"));
+			//userRepository.save(new User("Haris", "Dzafic","dzafe1987@gmail.com",bCryptPasswordEncoder.encode("123456"),"images/avatar5.png",true,"ADMIN"));
 // userRepository.save(new User(fName, lName, email, bCryptPasswordEncoder.encode(password), imgPath, true, "ADMIN"));
 		}
 	}
