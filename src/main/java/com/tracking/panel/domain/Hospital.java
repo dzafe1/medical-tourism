@@ -1,6 +1,7 @@
 package com.tracking.panel.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.NotBlank;
@@ -9,7 +10,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 @Entity
@@ -43,12 +43,14 @@ public class Hospital {
     @Column(name="is_active",columnDefinition="TINYINT(1) default '1'")
     private Boolean active=true;
 
+    @JsonManagedReference
     @JsonIgnore
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HospitalsImages> hospitalsImages;
     @JsonIgnore
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
-    private List<HospitalEmploye> hospitalsEmployee;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<HospitalEmployee> hospitalsEmployee;
     public Hospital() {
     }
     public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital) {
@@ -58,7 +60,7 @@ public class Hospital {
         this.address = address;
         this.aboutHospital = aboutHospital;
     }
-    public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital, List<HospitalsImages> hospitalsImages, List<HospitalEmploye> hospitalsEmployee) {
+    public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital, List<HospitalsImages> hospitalsImages, List<HospitalEmployee> hospitalsEmployee) {
         this.fullName = fullName;
         this.city = city;
         this.postalCode = postalCode;
@@ -132,11 +134,11 @@ public class Hospital {
         this.hospitalsImages = hospitalsImages;
     }
 
-    public List<HospitalEmploye> getHospitalsEmployee() {
+    public List<HospitalEmployee> getHospitalsEmployee() {
         return hospitalsEmployee;
     }
 
-    public void setHospitalsEmployee(List<HospitalEmploye> hospitalsEmployee) {
+    public void setHospitalsEmployee(List<HospitalEmployee> hospitalsEmployee) {
         this.hospitalsEmployee = hospitalsEmployee;
     }
 

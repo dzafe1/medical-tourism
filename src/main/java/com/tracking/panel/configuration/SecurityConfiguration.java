@@ -37,6 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/access-denied")
                 .and()
                 .csrf();
+        /*http.authorizeRequests().antMatchers("/**").permitAll();*/
     }
     @Override
     public void configure(WebSecurity web) throws Exception {

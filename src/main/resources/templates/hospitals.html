@@ -95,7 +95,8 @@
                                             <td th:text="${hospital.postalCode}"> </td>
                                             <td>
                                                 <button data-toggle="modal" data-target="#myModal" th:attr="onclick='fillModal('+${hospital.id }+')'" class="waves-effect waves-light btn light-blue accent-3">edit</button>
-                                                <a th:href="@{/delete-hospital/}+ ${hospital.id}"> <span class="waves-effect waves-light btn red ">delete</span></a>
+                                                <a th:href="@{/delete-hospital/} + ${hospital.id}"> <span class="waves-effect waves-light btn red ">delete</span></a>
+                                                <a th:href="@{/edit-hospital-employees/} + ${hospital.id}" class="waves-effect waves-light btn green">edit employees</a>
                                             </td>
                                         </tr>
                                         </th:block>
@@ -267,6 +268,10 @@
                 $("#hospitalCity").val(msg.hospital.city);
                 $("#postalCode").val(msg.hospital.postalCode);
                 $("#about").val(msg.hospital.aboutHospital);
+/*
+                for(var i=0;i<msg.hospital.hospitalsEmployee.length;i++){
+                    console.log(msg.hospital.hospitalsEmployee[i].fName);
+                }*/
                 $("#form").attr('action', "/edit-hospital/"+msg.hospital.id);
             },
             error: function (xhr, textStatus, errorThrown) {

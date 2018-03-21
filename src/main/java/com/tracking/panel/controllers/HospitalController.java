@@ -1,7 +1,7 @@
 package com.tracking.panel.controllers;
 
 import com.tracking.panel.domain.Hospital;
-import com.tracking.panel.domain.HospitalEmploye;
+import com.tracking.panel.domain.HospitalEmployee;
 import com.tracking.panel.domain.HospitalsImages;
 import com.tracking.panel.repository.HospitalEmployeeRepository;
 import com.tracking.panel.repository.HospitalRepository;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,10 +38,10 @@ public class HospitalController{
     public String addHospital(Model model) {
         Hospital hospital=new Hospital();
         HospitalsImages hospitalsImages=new HospitalsImages();
-        HospitalEmploye hospitalEmploye=new HospitalEmploye();
+        HospitalEmployee hospitalEmployee =new HospitalEmployee();
         model.addAttribute(hospital);
         model.addAttribute(hospitalsImages);
-        model.addAttribute(hospitalEmploye);
+        model.addAttribute(hospitalEmployee);
         return "add-hospital";
     }
     @PostMapping(value = "/add-hospital")
@@ -65,7 +64,6 @@ public class HospitalController{
                     Path path = Paths.get("C:/Users/haris/IdeaProjects/panel/src/main/resources/static/images/hospitals/" + file.getOriginalFilename());
                     Files.write(path, bytes);
                     hospitalsImagesRepository.save(new HospitalsImages(path.toString(),newHospital));
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -92,33 +90,43 @@ public class HospitalController{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    hospitalEmployeeRepository.save(new HospitalEmploye(employeeFname.get(i), employeeLname.get(i), employeeEmail.get(i), employeePicturePath, employeeTitle.get(i), date, true, newHospital));
+                    hospitalEmployeeRepository.save(new HospitalEmployee(employeeFname.get(i), employeeLname.get(i), employeeEmail.get(i), employeePicturePath, employeeTitle.get(i), date, true, newHospital));
                 }
             }
             redirectAttributes.addFlashAttribute("hospitalInserted", "Hospital successfully inserted!");
             return "redirect:/add-hospital";
         }
     }
-    @GetMapping(value = "/overview-hospitals")
-    public String overviewHospital(ModelMap modelMap){
-        List<Hospital> hospitals=hospitalRepository.getAllHospitals();
-        modelMap.addAttribute("hospitals",hospitals);
-        return "hospitals";
-    }
-    @GetMapping(value = "/get-hospital-data/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Map getHospitalsData(@PathVariable Long id){
-        return Collections.singletonMap("hospital", hospitalRepository.findOneById(id));
-    }
-    @GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String test(){
-        List<HospitalEmploye> employes=hospitalRepository.findOneById(new Long(1)).getHospitalsEmployee();
-        return employes.get(1).getEmail();
-    }
+
     @GetMapping(value = "/delete-hospital/{id}")
     public String deleteHospital(Hospital hospital,RedirectAttributes redirectAttributes,@PathVariable Long id){
         hospitalRepository.delete(id);
         redirectAttributes.addFlashAttribute("hospitalDeleted", "Hospital deleted!");
         return "redirect:/overview-hospitals";
     }
+
+    @GetMapping(value = "/overview-hospitals")
+    public String overviewHospital(Model model){
+        List<Hospital> hospitals=hospitalRepository.getAllHospitals();
+        model.addAttribute("hospitals",hospitals);
+        return "hospitals";
+    }
+    @GetMapping(value = "/get-hospital-data/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Map getHospitalsData(@PathVariable Long id){
+        Hospital hospital=hospitalRepository.findOneById(id);
+        return Collections.singletonMap("hospital", hospital);
+    }
+
+
+    @GetMapping(value = "/test",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String test(){
+        Hospital hospital=hospitalRepository.findOneById(new Long(1));
+        List<HospitalEmployee> employes=hospitalEmployeeRepository.findAllByHospital(hospital);
+        for (HospitalEmployee n : employes){
+            System.out.println(employes);
+        }
+        return "";
+    }
+
 }
 

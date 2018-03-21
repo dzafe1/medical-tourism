@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/header}" >
+<head xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Materialize Bootstrap Admin panel</title>
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" th:href="@{/dist/img/ico/fav.png}" href="../static/dist/img/ico/fav.png" />
+    <!-- Start Global Mandatory Style
+         =====================================================================-->
+    <!-- jquery-ui css -->
+    <link th:href="@{/plugins/jquery-ui-1.12.1/jquery-ui.min.css}"  rel="stylesheet" type="text/css" />
+    <!-- materialize css -->
+    <link th:href="@{/plugins/materialize/css/materialize.min.css}" rel="stylesheet" />
+    <!-- Bootstrap css-->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link th:href="@{/plugins/animate/animate.css}" href="../static/plugins/animate/animate.css" rel="stylesheet" />
+    <!-- Material Icons CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link th:href="@{/font-awesome/css/font-awesome.min.css}" href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Monthly css -->
+    <link th:href="@{/plugins/monthly/monthly.css}" href="../static/plugins/monthly/monthly.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar scroll css -->
+    <link th:href="@{/plugins/simplebar/dist/simplebar.css}" href="../static/plugins/simplebar/dist/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- mCustomScrollbar css -->
+    <link th:href="@{/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css}" href="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" />
+    <!-- custom CSS -->
+    <link th:href="@{/dist/css/stylematerial.css}" href="../static/dist/css/stylematerial.css" rel="stylesheet" />
+    <style>
+        .panel-title,.panel-title i{
+            color: #26a69a!important;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+    <!--Layout goes here-->
+    <div th:replace="/layouts/header :: header"> </div>
+
+    <!-- layout ends here -->
+    <!-- Page content -->
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <!-- Content Header (Page header) -->
+            <section class="content-header z-depth-1">
+                <div class="header-icon">
+                    <i class="fa fa-cog"></i>
+                </div>
+                <div class="header-title">
+                    <h1> Edit Employees</h1>
+
+                    <ul class="link hidden-xs">
+                        <li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+                        <li><a href="#">edit employees</a></li>
+                    </ul>
+                </div>
+            </section>
+            <!-- page section -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- forms cntrol -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa fa-cog fa-lg"></i>
+                                <h2>Edit</h2>
+                            </div>
+                            <div class="card-content">
+                               <!-- <div  th:if="${userInserted} != null"  class="alert alert-success z-depth-1">
+                                    <strong>Success!</strong> New user inserted.
+                                </div>-->
+                                <div class="panel-group" id="accordion" role="tablist">
+                                <th:block th:each="employee : ${employees}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading panel-acc" role="tab" th:id="'headingOne'+${employee.id}">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                                   th:href="'#collapseOne'+${employee.id }"
+                                                   th:attr="aria-controls='collapseOne'+${employee.id }"
+                                                   th:inline="text">
+                                                    <i class="more-less glyphicon glyphicon-plus"></i>
+                                                    [[${employee.fName+' '+employee.lName}]]
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div th:id="'collapseOne'+${employee.id}"
+                                             class="panel-collapse collapse" role="tabpanel"
+                                             th:attr="aria-labelledby='headingOne'+${employee.id}">
+                                            <div class="panel-body panel-sum">
+                                                <div class="row">
+                                                    <div class="col-md-offset-5 col-md-4">
+                                                        <img class="img-responsive" th:src="${employee.imgPath}" style="height: 200px;">
+                                                    </div>
+                                                </div>
+                                                <form th:action="@{/edit-hospital-employee}" th:id="'form'+${employee.id}" th:attr="onsubmit='funkcija('+${employee.id }+')'" method="post" class="form-horizontal">
+                                                    <input type="hidden" name="employeeId" th:value="${employee.id}">
+                                                    <input type="hidden" name="hospitalId" th:value="${hospitalId}">
+                                                    <h2 class="text-center">Edit Employee</h2>
+                                                    <fieldset>
+                                                        <!-- Text input-->
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">First Name:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-field">
+                                                                    <input name="fName"  type="text" class="validate" th:value="${employee.fName}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Text input-->
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Last Name:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-field">
+                                                                    <input name="lName"  type="text" class="validate" th:value="${employee.lName}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Email:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-field">
+                                                                    <input name="email"  type="email" class="validate" th:value="${employee.email}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label  class="col-md-4 control-label">Select role:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-field">
+                                                                    <select type="text" name="employeeTitle" class="validate required form-control">
+                                                                        <option selected disabled>Choose role</option>
+                                                                        <option value="Doctor" th:selected="${employee.title == 'Doctor'}">Doctor</option>
+                                                                        <option value="Manager" th:selected="${employee.title == 'Manager'}">Manager</option>
+                                                                        <option value="Technician" th:selected="${employee.title == 'Technician'}">Technician</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Add Employee's Date of birth:</label>
+                                                            <div class="col-md-4">
+                                                                <input class="datepicker" name="employeeDob" type="text" th:value="${employee.dob}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label">Upload Picture:</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-field">
+                                                                    <input name="employeePictures" class="form-control" type="file" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Button -->
+                                                        <div class="form-group">
+                                                            <label class="col-md-4 control-label"></label>
+                                                            <div class="col-md-4">
+                                                                <button type="submit" class="btn btn-success">Submit <span class="glyphicon glyphicon-send"></span></button>
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./bootstrap forms -->
+            </div>
+            <!-- ./row -->
+        </div>
+        <!-- ./cotainer -->
+    </div>
+    <!-- ./page-content -->
+    <!-- ./page-content-wrapper -->
+
+    <script>
+        function funkcija(id){
+            document.getElementById("form"+id).submit();
+        }
+    </script>
+
+
+
+</div>
+<!-- Preloader -->
+
+<div th:replace="layouts/preloader :: preloader"> </div>
+
+<!-- End Preloader -->
+
+
+
+<!-- Start Core Plugins
+     =====================================================================-->
+<!-- jQuery -->
+<script th:src="@{/plugins/jQuery/jquery-3.2.1.min.js}" src="../static/plugins/jQuery/jquery-3.2.1.min.js"
+        type="text/javascript"></script>
+<!-- jquery-ui -->
+<script th:src="@{/plugins/jquery-ui-1.12.1/jquery-ui.min.js}" src="../static/plugins/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script th:src="@{/bootstrap/js/bootstrap.min.js}" src="../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- materialize  -->
+<script th:src="@{/plugins/materialize/js/materialize.min.js}" src="../static/plugins/materialize/js/materialize.min.js" type="text/javascript"></script>
+<!-- metismenu-master -->
+<script th:src="@{/plugins/metismenu-master/dist/metisMenu.min.js}" src="../static/plugins/metismenu-master/dist/metisMenu.min.js" type="text/javascript"></script>
+<!-- SlimScroll -->
+<script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}" src="../static/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- m-custom-scrollbar -->
+<script th:src="@{/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js}" src="../static/plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+<!-- scroll -->
+<script th:src="@{/plugins/simplebar/dist/simplebar.js}" src="../static/plugins/simplebar/dist/simplebar.js" type="text/javascript"></script>
+<!-- custom js -->
+<script th:src="@{/dist/js/custom.js}" src="../static/dist/js/custom.js" type="text/javascript"></script>
+<!-- End Core Plugins
+     =====================================================================-->
+<!-- Start Page Lavel Plugins
+     =====================================================================-->
+<!-- Sparkline js -->
+<script th:src="@{/plugins/sparkline/sparkline.min.js}" src="../static/plugins/sparkline/sparkline.min.js" type="text/javascript"></script>
+<!-- Counter js -->
+<script th:src="@{/plugins/counterup/jquery.counterup.min.js}" src="../static/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+<!-- ChartJs JavaScript -->
+<script th:src="@{/plugins/chartJs/Chart.min.js}" src="../static/plugins/chartJs/Chart.min.js" type="text/javascript"></script>
+<!-- Monthly js -->
+<script th:src="@{/plugins/monthly/monthly.js}" src="../static/plugins/monthly/monthly.js" type="text/javascript"></script>
+
+<!-- End Page Lavel Plugins
+     =====================================================================-->
+<!-- Start Theme label Script
+     =====================================================================-->
+<!-- main js-->
+<script th:src="@{/dist/js/main.js}" src="../static/dist/js/main.js" type="text/javascript"></script>
+<!-- End Theme label Script
+     =====================================================================-->
+<script>
+    $(document).ready(function () {
+        $('.datepicker').each(function () {
+            $(this).pickadate({
+                format: 'yyyy-mm-dd',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 35 // Creates a dropdown of 15 years to control year
+            })
+        });
+    });
+</script>
+</body>
+</html>

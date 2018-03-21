@@ -142,4 +142,8 @@ public class UserController {
     public String unauthorizedPage(){
         return "403";
     }
+    @GetMapping("/404")
+    public String notFoundPage(){
+        return "404";
+    }
 }

@@ -1,5 +1,7 @@
 package com.tracking.panel.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Email;
@@ -18,7 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Where(clause="is_active = 1")
 @SQLDelete(sql="Update hospital_employee SET is_active = 0 where id=?")
-public class HospitalEmploye {
+public class HospitalEmployee {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -57,14 +59,16 @@ public class HospitalEmploye {
     @Column(name="is_active",columnDefinition="TINYINT(1) default '1'")
     private Boolean active=true;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonIgnore
     @JoinColumn(name = "hospital_id")
+    @JsonBackReference
     private Hospital hospital;
 
-    public HospitalEmploye() {
+    public HospitalEmployee() {
     }
 
-    public HospitalEmploye(String fName, String lName, String email, String imgPath, String title, Date dob, Boolean active, Hospital hospital) {
+    public HospitalEmployee(String fName, String lName, String email, String imgPath, String title, Date dob, Boolean active, Hospital hospital) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
@@ -165,7 +169,7 @@ public class HospitalEmploye {
 
     @Override
     public String toString() {
-        return "HospitalEmploye{" +
+        return "HospitalEmployee{" +
                 "id=" + id +
                 ", fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +

@@ -1,5 +1,6 @@
 package com.tracking.panel.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -13,7 +14,8 @@ public class HospitalsImages {
     private Long id;
     @NotEmpty(message = "*Please provide image Hospital")
     private String path;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
