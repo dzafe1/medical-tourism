@@ -60,7 +60,6 @@ public class HospitalEmployee {
     private Boolean active=true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    //@JsonIgnore
     @JoinColumn(name = "hospital_id")
     @JsonBackReference
     private Hospital hospital;

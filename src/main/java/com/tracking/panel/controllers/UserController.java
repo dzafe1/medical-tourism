@@ -127,7 +127,7 @@ public class UserController {
             updated=true;
         }
         if(updated) {
-            userDB = userRepository.save(userDB);
+            userRepository.save(userDB);
             redirectAttributes.addFlashAttribute("userUpdated", "User updated!");
         }
         return "redirect:/overview-users";

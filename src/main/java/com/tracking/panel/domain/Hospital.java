@@ -49,7 +49,7 @@ public class Hospital {
     private List<HospitalsImages> hospitalsImages;
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
     private List<HospitalEmployee> hospitalsEmployee;
     public Hospital() {
     }

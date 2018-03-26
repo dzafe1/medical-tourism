@@ -79,7 +79,6 @@ public class HospitalController{
                         Path path = Paths.get("C:/Users/haris/IdeaProjects/panel/src/main/resources/static/images/hospitals employees/" + employeePictures.get(i).getOriginalFilename());
                         Files.write(path, bytes);
                         employeePicturePath = path.toString();
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -96,6 +95,40 @@ public class HospitalController{
             redirectAttributes.addFlashAttribute("hospitalInserted", "Hospital successfully inserted!");
             return "redirect:/add-hospital";
         }
+    }
+
+    @PostMapping(value = "/edit-hospital")
+    public String editHospital(RedirectAttributes redirectAttributes,
+                               @RequestParam("hospitalId") Long id,@RequestParam("fullName") String fullName,
+                               @RequestParam("hospitalCity") String hospitalCity,@RequestParam("postalCode") String postalCode,
+                               @RequestParam("about") String about){
+        System.out.println("eo me");
+        Hospital hospital=hospitalRepository.findOneById(id);
+        if(hospital==null){
+            return "redirect:/404";
+        }
+        Boolean updated=false;
+        if (!hospital.getFullName().equals(fullName) && !fullName.isEmpty()){
+            hospital.setFullName(fullName);
+            updated=true;
+        }
+        if (!hospital.getCity().equals(hospitalCity) && !hospitalCity.isEmpty()){
+            hospital.setCity(hospitalCity);
+            updated=true;
+        }
+        if (!hospital.getPostalCode().equals(postalCode) && !postalCode.isEmpty()){
+            hospital.setPostalCode(postalCode);
+            updated=true;
+        }
+        if (!hospital.getAboutHospital().equals(about) && !about.isEmpty()){
+            hospital.setAboutHospital(about);
+            updated=true;
+        }
+        if(updated){
+            hospitalRepository.save(hospital);
+            redirectAttributes.addFlashAttribute("hospitalUpdated", "Hospital updated!");
+        }
+        return "redirect:/overview-hospitals";
     }
 
     @GetMapping(value = "/delete-hospital/{id}")
