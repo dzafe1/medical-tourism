@@ -24,6 +24,7 @@ public class HospitalEmployee {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     @NotEmpty(message = "Please provide doctor's First name!")
     @Size(min=2, max=30,message = "First name must be greater then 2 characters!")
@@ -60,7 +61,7 @@ public class HospitalEmployee {
     private Boolean active=true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hospital_id")
+    @JoinColumn(name = "hospital_id", referencedColumnName = "id")
     @JsonBackReference
     private Hospital hospital;
 

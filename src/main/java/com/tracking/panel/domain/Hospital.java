@@ -45,12 +45,16 @@ public class Hospital {
 
     @JsonManagedReference
     @JsonIgnore
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_id",referencedColumnName = "id")
     private List<HospitalsImages> hospitalsImages;
+
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "hospital_id", referencedColumnName = "id")
     private List<HospitalEmployee> hospitalsEmployee;
+
     public Hospital() {
     }
     public Hospital(String fullName, String city, String postalCode, String address, String aboutHospital) {

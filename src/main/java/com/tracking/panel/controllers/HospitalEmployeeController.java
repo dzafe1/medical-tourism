@@ -47,9 +47,6 @@ public class HospitalEmployeeController {
             return "redirect:/404";
     }
 
-    /*
-    @TODO postoji bug neki sa updated, ispitati sa sout komandom
-     */
     @PostMapping(value = "/edit-hospital-employee")
     public String editHospitalEmployee(@Valid HospitalEmployee employeeForm,
                                        BindingResult bindingResult,

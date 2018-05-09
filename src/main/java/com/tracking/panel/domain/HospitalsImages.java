@@ -16,7 +16,7 @@ public class HospitalsImages {
     private String path;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
-    @JoinColumn(name = "hospital_id")
+    @JoinColumn(name = "hospital_id",referencedColumnName = "id")
     private Hospital hospital;
 
     public HospitalsImages() {
